@@ -2,18 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+
 
 namespace ObjectPortal
 {
-    public interface IObjectPortalHandleFetch
+
+    public interface IHandleObjectPortalFetch
     {
 
         void Fetch();
 
     }
 
-    public interface IObjectPortalHandleFetch<T>
+    public interface IHandleObjectPortalFetch<T>
     {
 
         void Fetch(T criteria);

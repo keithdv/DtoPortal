@@ -5,11 +5,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Example.Lib
 {
-    public interface IBusinessItemList : Csla.IBusinessListBase<IBusinessItem>, IDtoPortalHandleDtoList<BusinessItemDto>, IObjectPortalHandleFetch<List<BusinessItemDto>>
+    public interface IBusinessItemList : Csla.IBusinessListBase<IBusinessItem>, IHandleDtoPortalList<BusinessItemDto>, IHandleObjectPortalFetch<List<BusinessItemDto>>
     {
     }
 }

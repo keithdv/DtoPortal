@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Autofac;
 using System.IO;
 using System.Runtime.Serialization;
@@ -106,12 +105,12 @@ namespace DtoPortal
         //public IList<I> FetchChildDtos<I>() where I :IDto
         //{
 
-        //    if (!scope.IsRegistered<IDtoPortalHandleDtoList<I>>())
+        //    if (!scope.IsRegistered<IHandleDtoPortalList<I>>())
         //    {
         //        throw new DtoPortalDalNotRegisteredException();
         //    }
 
-        //    var bo = scope.Resolve<IDtoPortalHandleDtoList<I>>();
+        //    var bo = scope.Resolve<IHandleDtoPortalList<I>>();
 
         //    return bo.CreateDtos();
 
@@ -120,12 +119,12 @@ namespace DtoPortal
         //public I FetchChildDto<I>() where I : IDto
         //{
 
-        //    if (!scope.IsRegistered<IDtoPortalHandleDto<I>>())
+        //    if (!scope.IsRegistered<IHandleDtoPortal<I>>())
         //    {
         //        throw new DtoPortalDalNotRegisteredException();
         //    }
 
-        //    var bo = scope.Resolve<IDtoPortalHandleDto<I>>();
+        //    var bo = scope.Resolve<IHandleDtoPortal<I>>();
 
         //    var dto = bo.CreateDto();
 
@@ -153,4 +152,7 @@ namespace DtoPortal
           System.Runtime.Serialization.SerializationInfo info,
           System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
     }
+
+   
+
 }

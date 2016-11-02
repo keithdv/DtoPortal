@@ -4,7 +4,6 @@ using Autofac;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using ObjectPortal;
 using Example.Dal;
 using DtoPortal;
@@ -12,18 +11,24 @@ using DtoPortal;
 namespace Example.Lib
 {
     [Serializable]
-    public class Root : Csla.BusinessBase<Root>, IRoot, IObjectPortalHandleFetch, IObjectPortalHandleFetch<Guid>
+    public class Root : DtoBusinessBase<Root>, IRoot, IHandleObjectPortalFetch, IHandleObjectPortalFetch<Guid>
     {
 
-        IObjectPortal<IBusinessItemList> listPortal;
-        IDtoPortal<RootDto> dtoPortal;
+        public static DependencyPropertyInfo<IObjectPortal<IBusinessItemList>> BusinessItemListPortalProperty = new DependencyPropertyInfo<IObjectPortal<IBusinessItemList>>(nameof(BusinessItemListPortal));
 
-        public Root(IDtoPortal<RootDto> dtoPortal, IObjectPortal<IBusinessItemList> listPortal)
+        public IObjectPortal<IBusinessItemList> BusinessItemListPortal
         {
-            this.listPortal = listPortal;
-            this.dtoPortal = dtoPortal;
+            get { return GetDependencyProperty(BusinessItemListPortalProperty); }
         }
 
+        public static DependencyPropertyInfo<IDtoPortal<RootDto>> DtoPortalProperty = new DependencyPropertyInfo<IDtoPortal<RootDto>>(nameof(DtoPortal));
+
+        public IDtoPortal<RootDto> DtoPortal
+        {
+            get { return GetDependencyProperty(DtoPortalProperty); }
+        }
+
+        
         public static readonly PropertyInfo<IBusinessItemList> BusinessItemListProperty = RegisterProperty<IBusinessItemList>(c => c.BusinessItemList);
         public IBusinessItemList BusinessItemList
         {
@@ -31,20 +36,20 @@ namespace Example.Lib
             set { SetProperty(BusinessItemListProperty, value); }
         }
 
-        void IObjectPortalHandleFetch.Fetch()
+        void IHandleObjectPortalFetch.Fetch()
         {
 
-            var rootDto = dtoPortal.Fetch();
+            var rootDto = DtoPortal.Fetch();
 
-            BusinessItemList = listPortal.Fetch(rootDto.BusinessItemDtos);
+            BusinessItemList = BusinessItemListPortal.Fetch(rootDto.BusinessItemDtos);
 
         }
 
         public void Fetch(Guid criteria)
         {
-            var rootDto = dtoPortal.Fetch(criteria);
+            var rootDto = DtoPortal.Fetch(criteria);
 
-            BusinessItemList = listPortal.Fetch(rootDto.BusinessItemDtos);
+            BusinessItemList = BusinessItemListPortal.Fetch(rootDto.BusinessItemDtos);
         }
 
         public void SaveDto()
@@ -58,7 +63,7 @@ namespace Example.Lib
 
             dto.BusinessItemDtos = BusinessItemList.CreateDtos();
 
-            dtoPortal.Update(dto);
+            DtoPortal.Update(dto);
 
 
 

@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Autofac;
 using ObjectPortal;
 using Example.Dal;
@@ -12,16 +11,22 @@ using DtoPortal;
 namespace Example.Lib
 {
     [Serializable]
-    public class BusinessItemList : Csla.BusinessListBase<BusinessItemList, IBusinessItem>, IBusinessItemList
+    public class BusinessItemList : DtoBusinessListBase<BusinessItemList, IBusinessItem>, IBusinessItemList
     {
 
-        IObjectPortal<IBusinessItem> itemPortal;
-        Lazy<DtoPortalUpdateManager> updateManager;
 
-        public BusinessItemList(IObjectPortal<IBusinessItem> itemPortal, Lazy<DtoPortalUpdateManager> updateManager)
+        public static DependencyPropertyInfo<IObjectPortal<IBusinessItem>> ItemPortalProperty = new DependencyPropertyInfo<IObjectPortal<IBusinessItem>>(nameof(ItemPortal));
+
+        public IObjectPortal<IBusinessItem> ItemPortal
         {
-            this.itemPortal = itemPortal;
-            this.updateManager = updateManager;
+            get { return GetDependencyProperty(ItemPortalProperty); }
+        }
+
+        public static DependencyPropertyInfo<DtoPortalUpdateManager> DtoPortalUpdateManagerProperty = new DependencyPropertyInfo<DtoPortalUpdateManager>(nameof(DtoPortalUpdateManager));
+
+        public DtoPortalUpdateManager DtoPortalUpdateManager
+        {
+            get { return GetDependencyProperty(DtoPortalUpdateManagerProperty); }
         }
 
         public List<BusinessItemDto> CreateDtos()
@@ -37,7 +42,7 @@ namespace Example.Lib
                 // Need to add a middle man to do this
                 if (item.IsDirty)
                 {
-                    dtos.Add(updateManager.Value.CreateDto<BusinessItemDto>(item));
+                    dtos.Add(DtoPortalUpdateManager.CreateDto<BusinessItemDto>(item));
                 }
             }
 
@@ -50,7 +55,7 @@ namespace Example.Lib
 
             foreach (var i in criteria)
             {
-                Add(itemPortal.Fetch(i));
+                Add(ItemPortal.Fetch(i));
             }
 
         }

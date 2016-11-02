@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ObjectPortal</RootNamespace>
     <AssemblyName>ObjectPortal</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -48,8 +49,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DependencyManager.cs" />
+    <Compile Include="DependencyPropertyInfo.cs" />
+    <Compile Include="DtoBusinessBase.cs" />
+    <Compile Include="DtoBusinessListBase.cs" />
+    <Compile Include="IDependencyPropertyInfo.cs" />
+    <Compile Include="IDtoBusinessObject.cs" />
     <Compile Include="IObjectPortal.cs" />
-    <Compile Include="IObjectPortalHandle.cs" />
+    <Compile Include="IHandleObjectPortal.cs" />
     <Compile Include="ObjectPortal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

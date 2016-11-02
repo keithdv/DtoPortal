@@ -44,6 +44,9 @@ namespace Example.Test
                 builder.RegisterType<RootDal>().AsImplementedInterfaces();
                 builder.RegisterType<BusinessItemListDal>().AsImplementedInterfaces();
 
+
+                builder.RegisterType<DependencyManager>();
+
                 container = builder.Build();
 
             }

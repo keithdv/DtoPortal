@@ -7,12 +7,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Runtime.Serialization;
 namespace Example.Lib
 {
     [Serializable]
-    public class BusinessItem : Csla.BusinessBase<BusinessItem>, IBusinessItem
+    public class BusinessItem : DtoBusinessBase<BusinessItem>, IBusinessItem
     {
 
 
@@ -66,6 +65,7 @@ namespace Example.Lib
         public void UpdatedDto(BusinessItemDto dto)
         {
             this.UpdatedID = dto.UpdateUniqueID;
+
         }
 
         //private void Child_Create()

@@ -5,7 +5,7 @@ using System;
 
 namespace Example.Lib
 {
-    public interface IBusinessItem : Csla.IBusinessBase, IObjectPortalHandleFetch<BusinessItemDto>, IDtoPortalHandleDto<BusinessItemDto>
+    public interface IBusinessItem : Csla.IBusinessBase, IHandleObjectPortalFetch<BusinessItemDto>, IHandleDtoPortal<BusinessItemDto>
     {
 
         Guid Criteria { get; set; }

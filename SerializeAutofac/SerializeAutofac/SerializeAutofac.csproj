@@ -4,16 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{55DBB403-5BF9-4770-8330-ABF787FEC4D8}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{ACEDE756-A643-4FFE-A5A1-D34DA94CC90B}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Example.Lib</RootNamespace>
-    <AssemblyName>Example.Lib</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <RootNamespace>SerializeAutofac</RootNamespace>
+    <AssemblyName>SerializeAutofac</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,6 +24,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -33,10 +35,6 @@
   <ItemGroup>
     <Reference Include="Autofac, Version=4.1.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <HintPath>..\packages\Autofac.4.1.1\lib\net45\Autofac.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Csla, Version=4.6.500.0, Culture=neutral, PublicKeyToken=93be5fdc093e4c30, processorArchitecture=MSIL">
-      <HintPath>..\packages\CSLA-Core.4.6.500\lib\net45\Csla.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -50,30 +48,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BusinessItem.cs" />
-    <Compile Include="BusinessItemList.cs" />
-    <Compile Include="IBusinessItem.cs" />
-    <Compile Include="IBusinessItemList.cs" />
-    <Compile Include="IRoot.cs" />
+    <Compile Include="BO.cs" />
+    <Compile Include="DependencyA.cs" />
+    <Compile Include="Module.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Root.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\DtoPortal\DtoPortal.csproj">
-      <Project>{41d5d8b3-8c4c-45d7-b10c-9d97eb1c6415}</Project>
-      <Name>DtoPortal</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Example.Dal\Example.Dal.csproj">
-      <Project>{abe8262d-813c-4fdc-8d23-0990cbb8931d}</Project>
-      <Name>Example.Dal</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ObjectPortal\ObjectPortal.csproj">
-      <Project>{09bb2c18-7f26-4931-914f-179bb2246f9b}</Project>
-      <Name>ObjectPortal</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

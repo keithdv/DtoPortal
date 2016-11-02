@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace DtoPortal
 {
@@ -24,7 +23,7 @@ namespace DtoPortal
             where T : IDto
         {
             public T Dto { get; set; }
-            public IDtoPortalHandleDto<T> BO { get; set; }
+            public IHandleDtoPortal<T> BO { get; set; }
 
             public void UpdatedDto(IDto dto)
             {
@@ -36,7 +35,7 @@ namespace DtoPortal
 
         private uint Counter;
 
-        public void AddObjectReference<T>(T dto, IDtoPortalHandleDto<T> bo) where T : IDto
+        public void AddObjectReference<T>(T dto, IHandleDtoPortal<T> bo) where T : IDto
         {
             Counter++;
             ObjectReferences.Add(Counter, new ObjectReference<T>() { Dto = dto, BO = bo });
@@ -54,7 +53,7 @@ namespace DtoPortal
 
         public T CreateDto<T>(IBusinessBase bo) where T : IDto
         {
-            var handle = bo as IDtoPortalHandleDto<T>;
+            var handle = bo as IHandleDtoPortal<T>;
 
             var dto = handle.CreateDto();
 
@@ -69,7 +68,7 @@ namespace DtoPortal
 
         //public IList<T> CreateDtos<T, L>(L list) where T : IDto
         //{
-        //    var handle = list as IDtoPortalHandleDtoList<T>;
+        //    var handle = list as IHandleDtoPortalList<T>;
 
         //    var result = handle.CreateDtos();
 

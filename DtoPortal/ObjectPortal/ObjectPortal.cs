@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace ObjectPortal
 {
@@ -17,10 +16,12 @@ namespace ObjectPortal
     {
 
         Func<T> createT;
+        Func<DependencyManager> createDM;
 
-        public ObjectPortal(Func<T> createT)
+        public ObjectPortal(Func<T> createT, Func<DependencyManager> createDM)
         {
             this.createT = createT;
+            this.createDM = createDM;
         }
 
         public T Fetch()
@@ -30,11 +31,18 @@ namespace ObjectPortal
 
             var result = createT();
 
-            var fetch = result as IObjectPortalHandleFetch;
+            var fetch = result as IHandleObjectPortalFetch;
 
             if(fetch == null)
             {
                 throw new ObjectPortalOperationNotSupportedException("Fetch with no criteria not supported");
+            }
+
+            var dtoBB = result as IDtoBusinessObject;
+
+            if(dtoBB != null)
+            {
+                dtoBB.DependencyManager = createDM();
             }
 
             fetch.Fetch();
@@ -48,11 +56,18 @@ namespace ObjectPortal
 
             var result = createT();
 
-            var fetch = result as IObjectPortalHandleFetch<C>;
+            var fetch = result as IHandleObjectPortalFetch<C>;
 
             if (fetch == null)
             {
                 throw new ObjectPortalOperationNotSupportedException("Fetch with no criteria not supported");
+            }
+
+            var dtoBB = result as IDtoBusinessObject;
+
+            if (dtoBB != null)
+            {
+                dtoBB.DependencyManager = createDM();
             }
 
             fetch.Fetch(criteria);

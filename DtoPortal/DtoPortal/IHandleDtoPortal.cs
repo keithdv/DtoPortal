@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace DtoPortal
 {
 
-    
-    public interface IDtoPortalHandleDto<T>
+
+    public interface IHandleDtoPortal<T>
         where T : IDto
     {
 
@@ -18,14 +17,10 @@ namespace DtoPortal
 
     }
 
-    public interface IDtoPortalHandleDtoList<T>
+    public interface IHandleDtoPortalList<T>
     where T : IDto
     {
-
-
         List<T> CreateDtos();
-        
-
     }
 
     public interface IDtoPortalHandleFetch<T>
@@ -35,9 +30,7 @@ namespace DtoPortal
 
     public interface IDtoPortalHandleFetch<C, T>
     {
-
         T Fetch(C criteria);
-
     }
 
     public interface IDtoPortalHandleUpdate<T>
