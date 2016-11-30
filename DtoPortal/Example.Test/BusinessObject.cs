@@ -8,18 +8,18 @@ namespace Example.Test
 
     public interface ILogger
     {
-        bool Log(string message);
-        bool Log(Exception ex);
+        void Log(string message);
+        void Log(Exception ex);
     }
 
     public interface IEmail
     {
-        bool SendEmail(string to, string subject, string body);
+        void SendEmail(string to, string subject, string body);
     }
 
     public interface IBusinessObject
     {
-        void Submit();
+        void Submit(string emailAddress);
     }
 
     public class BusinessObject : IBusinessObject
@@ -34,12 +34,11 @@ namespace Example.Test
             this.email = email;
         }
 
-        public void Submit()
+        public void Submit(string emailAddress)
         {
             try
             {
-                email.SendEmail("keith@aon.com", "Business Object Email", "Demo");
-                logger.Log("Email sent to keith@aon.com");
+                email.SendEmail(emailAddress, "Business Object Email", "Demo");
             }
             catch (Exception ex)
             {
@@ -57,16 +56,45 @@ namespace Example.Test
         {
 
             // Arrange
-            var logger = new Mock<ILogger>(MockBehavior.Strict);
-            var email = new Mock<IEmail>(MockBehavior.Strict);
+            var loggerMock = new Mock<ILogger>(MockBehavior.Strict);
+            var emailMock = new Mock<IEmail>(MockBehavior.Strict);
+            string emailAddress = @"test@fake.com";
 
-            var bo = new BusinessObject(logger.Object, email.Object);
+            var bo = new BusinessObject(loggerMock.Object, emailMock.Object);
+
+            // Setup emailMock
+
+
+
+
+
+
+
+            // Setup LoggerMock
+
+
+
+
+
+
+
+
 
             // Act
 
-            bo.Submit();
+            bo.Submit(emailAddress);
 
             // Assert
+
+
+
+
+
+
+
+
+
+
 
         }
 
